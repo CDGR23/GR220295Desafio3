@@ -1,0 +1,12 @@
+@model HojaDeVidaViewModel
+<h1>Mi hoja de vida</h1>
+<p>Complete los datos profesionales y adjunte su CV en PDF.</p>
+<form method="post" enctype="multipart/form-data" asp-action="Guardar">
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="mb-3"><label asp-for="FormacionAcademica" class="form-label">Formación académica</label><textarea asp-for="FormacionAcademica" class="form-control" rows="4"></textarea></div>
+    <div class="mb-3"><label asp-for="ExperienciaLaboral" class="form-label">Experiencia laboral</label><textarea asp-for="ExperienciaLaboral" class="form-control" rows="5"></textarea></div>
+    <div class="mb-3"><label asp-for="Competencias" class="form-label">Competencias</label><textarea asp-for="Competencias" class="form-control" rows="4"></textarea></div>
+    <div class="mb-3"><label asp-for="ArchivoCV" class="form-label">Archivo CV (PDF)</label><input asp-for="ArchivoCV" class="form-control" accept="application/pdf" /></div>
+    <button class="btn btn-success">Guardar hoja de vida</button>
+</form>

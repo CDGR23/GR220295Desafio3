@@ -1,0 +1,5 @@
+@model List<PostulacionDto>
+<h1>Mis postulaciones</h1>
+<table class="table table-striped"><thead><tr><th>Plaza</th><th>Fecha</th><th>Estado</th></tr></thead><tbody>
+@foreach (var item in Model) { <tr><td>@item.TituloPlaza</td><td>@item.FechaPostulacion.ToString("dd/MM/yyyy HH:mm")</td><td>@item.Estado</td></tr> }
+</tbody></table>

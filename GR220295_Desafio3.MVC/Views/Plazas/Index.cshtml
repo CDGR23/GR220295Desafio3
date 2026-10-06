@@ -1,0 +1,15 @@
+@model List<PlazaDto>
+<h1>Plazas disponibles y publicadas</h1>
+<table class="table table-striped align-middle">
+<thead><tr><th>Título</th><th>Institución</th><th>Publicación</th><th>Cierre</th><th>Estado</th><th></th></tr></thead>
+<tbody>
+@foreach (var plaza in Model)
+{
+<tr>
+<td>@plaza.Titulo</td><td>@plaza.Institucion</td><td>@plaza.FechaPublicacion.ToString("dd/MM/yyyy")</td><td>@plaza.FechaCierre.ToString("dd/MM/yyyy")</td><td><span class="badge bg-secondary">@plaza.Estado</span></td>
+<td><a asp-action="Details" asp-route-id="@plaza.IdPlaza" class="btn btn-sm btn-outline-primary">Detalle</a>
+</td>
+</tr>
+}
+</tbody></table>
+@if (User.IsInRole("Agente de Selección")) { <a asp-action="Crear" class="btn btn-primary">Crear nueva plaza</a> }

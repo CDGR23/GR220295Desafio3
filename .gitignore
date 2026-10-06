@@ -1,0 +1,30 @@
+## Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Build
+[Bb]in/
+[Oo]bj/
+
+## NuGet
+packages/
+*.nupkg
+
+## SQLite sidecar files
+*.db-shm
+*.db-wal
+*.db-journal
+
+## Logs
+*.log
+
+## CV uploaded at runtime
+GR220295_Desafio3.API/wwwroot/cv/*
+!GR220295_Desafio3.API/wwwroot/cv/.gitkeep
+
+## OS
+.DS_Store
+Thumbs.db

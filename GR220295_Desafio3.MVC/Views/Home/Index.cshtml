@@ -1,0 +1,27 @@
+@model List<PlazaDto>
+
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-3">
+        <h1 class="display-6">Bolsa de Trabajo del Gobierno de El Salvador</h1>
+        <p class="lead">Encuentra plazas disponibles y gestiona tus postulaciones en línea.</p>
+        <a class="btn btn-primary" asp-controller="Plazas" asp-action="Index">Ver todas las plazas</a>
+    </div>
+</div>
+
+<h2 class="mb-3">Plazas disponibles</h2>
+<div class="row g-3">
+@foreach (var plaza in Model)
+{
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">@plaza.Titulo</h5>
+                <p class="card-text">@plaza.Descripcion</p>
+                <p><strong>Institución:</strong> @plaza.Institucion</p>
+                <p><strong>Cierre:</strong> @plaza.FechaCierre.ToString("dd/MM/yyyy")</p>
+                <a class="btn btn-outline-primary" asp-controller="Plazas" asp-action="Details" asp-route-id="@plaza.IdPlaza">Ver detalles</a>
+            </div>
+        </div>
+    </div>
+}
+</div>

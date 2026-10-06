@@ -1,0 +1,13 @@
+@model List<UsuarioDto>
+<h1>Administración</h1>
+<p>Desde esta sección el administrador puede revisar usuarios y roles. El bloque de postulaciones se maneja en la opción correspondiente.</p>
+<a asp-controller="Administrador" asp-action="CrearUsuario" class="btn btn-primary mb-3">Crear usuario</a>
+<table class="table table-striped align-middle"><thead><tr><th>Nombre</th><th>Correo</th><th>Rol</th><th>Acciones</th></tr></thead><tbody>
+@foreach (var usuario in Model)
+{
+<tr><td>@usuario.NombreCompleto</td><td>@usuario.Email</td><td>@usuario.Rol</td><td>
+<form asp-action="CambiarRol" method="post" class="d-flex gap-2 mb-2">@Html.AntiForgeryToken()<input type="hidden" name="id" value="@usuario.Id"/><select name="rol" class="form-select"><option value="Administrador" selected="@(usuario.Rol == "Administrador" ? "selected" : null)">Administrador</option><option value="Agente de Selección" selected="@(usuario.Rol == "Agente de Selección" ? "selected" : null)">Agente de Selección</option><option value="Candidato" selected="@(usuario.Rol == "Candidato" ? "selected" : null)">Candidato</option></select><button class="btn btn-sm btn-warning">Cambiar</button></form>
+<form asp-action="Eliminar" method="post">@Html.AntiForgeryToken()<input type="hidden" name="id" value="@usuario.Id"/><button class="btn btn-sm btn-outline-danger">Eliminar</button></form>
+</td></tr>
+}
+</tbody></table>

@@ -1,0 +1,28 @@
+@model PlazaDto
+<h1>@Model.Titulo</h1>
+<p><strong>Institución:</strong> @Model.Institucion</p>
+<p><strong>Estado:</strong> @Model.Estado</p>
+<p><strong>Fecha de publicación:</strong> @Model.FechaPublicacion.ToString("dd/MM/yyyy HH:mm")</p>
+<p><strong>Fecha de cierre:</strong> @Model.FechaCierre.ToString("dd/MM/yyyy HH:mm")</p>
+<div class="card mb-3"><div class="card-body">@Model.Descripcion</div></div>
+@if (User.IsInRole("Candidato") && Model.Estado == "Abierta")
+{
+<form asp-controller="Postulaciones" asp-action="Postularse" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="idPlaza" value="@Model.IdPlaza" />
+    <button class="btn btn-success">Postularme a esta plaza</button>
+</form>
+}
+@if (User.IsInRole("Agente de Selección") && User.FindFirst("Token") is not null)
+{
+    <a class="btn btn-outline-primary" asp-action="Editar" asp-route-id="@Model.IdPlaza">Editar plaza</a>
+    <form asp-action="CambiarEstado" method="post" class="d-inline ms-2">@Html.AntiForgeryToken()<input type="hidden" name="id" value="@Model.IdPlaza"/><input type="hidden" name="estado" value="Abierta"/><button class="btn btn-outline-success">Publicar / abrir</button></form>
+}
+@if (User.IsInRole("Administrador") || User.IsInRole("Agente de Selección"))
+{
+<form asp-action="CambiarEstado" method="post" class="mt-3">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="id" value="@Model.IdPlaza" />
+    <div class="row g-2 align-items-end"><div class="col-auto"><label class="form-label">Cambiar estado</label><select name="estado" class="form-select"><option>Abierta</option><option>En evaluación</option><option>Cerrada</option></select></div><div class="col-auto"><button class="btn btn-warning">Guardar estado</button></div></div>
+</form>
+}

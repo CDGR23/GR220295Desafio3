@@ -1,0 +1,9 @@
+@model List<PostulacionDto>
+<h1>Gestión de postulaciones</h1>
+<table class="table table-striped"><thead><tr><th>Candidato</th><th>Plaza</th><th>Fecha</th><th>Estado</th><th>Acción</th></tr></thead><tbody>
+@foreach (var item in Model) {
+<tr><td>@item.NombreCandidato<br /><a asp-action="DescargarCv" asp-route-idUsuario="@item.IdCandidato" class="small">Ver CV</a></td><td>@item.TituloPlaza</td><td>@item.FechaPostulacion.ToString("dd/MM/yyyy")</td><td>@item.Estado</td><td>
+<form asp-action="CambiarEstado" method="post" class="d-flex gap-2"><input type="hidden" name="id" value="@item.IdPostulacion"/>@Html.AntiForgeryToken()<select name="estado" class="form-select"><option>En revisión</option><option>Aprobado</option><option>Rechazado</option></select><button class="btn btn-sm btn-primary">Guardar</button></form>
+</td></tr>
+}
+</tbody></table>
